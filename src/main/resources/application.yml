@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    username: postgres
+    password: oiu
+    url: jdbc:postgresql://localhost:5432/guitars
+    driver-class-name: org.postgresql.Driver
+
+server:
+  port: 8083

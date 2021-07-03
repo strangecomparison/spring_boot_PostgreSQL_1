@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Guitars</title>
+</head>
+<body>
+<div th:each="guitar : ${guitars}">
+    <a th:href="@{/guitars/{id}(id=${guitar.getId()})}"
+       th:text="${guitar.getManufacturer().getManufacturerName() + ', ' + guitar.getGuitarModel().getModelName() + ', '
+       + guitar.getCountry().getCountryName + ', ' + guitar.getYearOfIssue()}">user</a>
+</div>
+<br/>
+<br/>
+
+<a href="/guitars/new">Create new guitar</a>
+</body>
+</html>

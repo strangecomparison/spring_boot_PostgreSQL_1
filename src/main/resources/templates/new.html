@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create new guitar</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/guitars}" th:object="${guitar}">
+    <label for="manufacturer">Select manufacturer: </label>
+    <select th:field="*{manufacturer}" id="manufacturer">
+        <option th:value="1">Fender</option>
+        <option th:value="2">Gibson</option>
+        <option th:value="3">Gretsch</option>
+        <option th:value="4">Ibanez</option>
+    </select>
+
+    <br/>
+
+    <label for="model">Select model: </label>
+    <select th:field="*{model}" id="model">
+        <option th:value="1">Stratocaster</option>
+        <option th:value="2">Telecaster</option>
+        <option th:value="3">Jazzmaster</option>
+        <option th:value="4">Les Paul</option>
+        <option th:value="5">SG</option>
+        <option th:value="6">ES-335</option>
+        <option th:value="7">6120</option>
+        <option th:value="8">Countryman</option>
+        <option th:value="9">Falcon</option>
+        <option th:value="10">J. Custom</option>
+        <option th:value="11">RG 980</option>
+        <option th:value="12">JS1000</option>
+    </select>
+
+    <br/>
+
+    <label for="country">Select country: </label>
+    <select th:field="*{country}" id="country">
+        <option th:value="1">USA</option>
+        <option th:value="2">JAPAN</option>
+    </select>
+
+    <br/>
+
+    <label for="year">Enter year of issue: </label>
+    <input type="text" th:field="*{yearOfIssue}" id="year"/>
+
+    <br/>
+    <button type="submit">Create</button>
+</form>
+
+</body>
+</html>
