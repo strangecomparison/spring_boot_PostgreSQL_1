@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import ru.vasseugs.spring_boot_postgresql_1.entities.GuitarEntity;
-import ru.vasseugs.spring_boot_postgresql_1.entities.GuitarModelEntity;
-import ru.vasseugs.spring_boot_postgresql_1.entities.ManufacturerEntity;
-import ru.vasseugs.spring_boot_postgresql_1.models.GuitarModel;
+import ru.vasseugs.spring_boot_postgresql_1.dto.GuitarDTO;
 import ru.vasseugs.spring_boot_postgresql_1.service.GuitarService;
 import javax.validation.Valid;
 
@@ -26,31 +23,30 @@ public class GuitarController {
         this.guitarService = guitarService;
     }
 
+    // showing all guitars
     @GetMapping()
     public String getAllGuitars(Model model) {
         model.addAttribute("guitars", guitarService.getAllGuitars());
         return "guitars";
     }
 
-    // страница для создания новой гитары
+    // creating new guitar
     @GetMapping("/new")
     public String createNewGuitar(Model model) {
-        model.addAttribute("guitar", new GuitarModel());
+        model.addAttribute("guitar", new GuitarDTO());
         return "new";
     }
 
-
+    // saving new guitar
     @PostMapping()
-    public String saveNewGuitar(@ModelAttribute("guitar") @Valid GuitarModel guitarModel,
+    public String saveNewGuitar(@ModelAttribute("guitar") @Valid GuitarDTO guitarDTO,
                                 BindingResult bindingResult) {
 
         if(bindingResult.hasErrors()) {
             return "new";
         }
 
-        GuitarEntity guitarEntity = new GuitarEntity();
-
-        guitarService.save(guitarEntity);
+        guitarService.save(guitarDTO);    // passing model to hide realization
 
         return "redirect:/guitars";
     }

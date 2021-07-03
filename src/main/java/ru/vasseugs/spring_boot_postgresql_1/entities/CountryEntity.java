@@ -26,4 +26,14 @@ public class CountryEntity {
             fetch = FetchType.LAZY
     )
     private List<GuitarEntity> guitars;
+
+    public void addGuitar(GuitarEntity guitarEntity) {
+        guitars.add(guitarEntity);
+        guitarEntity.setCountry(this);
+    }
+
+    public void removeGuitar(GuitarEntity guitarEntity) {
+        guitars.remove(guitarEntity);
+        guitarEntity.setCountry(null);
+    }
 }
