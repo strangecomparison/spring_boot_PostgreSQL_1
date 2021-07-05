@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>The guitar</title>
+</head>
+<body>
+<p th:text="${guitar.getManufacturer().getManufacturerName()}">VALUE</p>
+<p th:text="${guitar.getGuitarModel().getModelName()}">VALUE</p>
+<p th:text="${guitar.getCountry().getCountryName()}">VALUE</p>
+<p th:text="${guitar.getYearOfIssue()}">VALUE</p>
+
+<br/>
+<br/>
+
+<form th:method="DELETE" th:action="@{/guitars/{id}(id=${guitar.getId()})}">
+    <input type="submit" value="Delete the guitar"/>
+</form>
+
+</body>
+</html>

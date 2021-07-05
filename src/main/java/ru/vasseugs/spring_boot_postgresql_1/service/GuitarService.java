@@ -70,6 +70,15 @@ public class GuitarService {
 
     }
 
+    public GuitarEntity showGuitar(long id) {
+        return guitarRepository.findById(id)
+                .orElse(null);
+    }
+
+    public void deleteGuitar(long id) {
+        guitarRepository.deleteById(id);
+    }
+
 
 
 }

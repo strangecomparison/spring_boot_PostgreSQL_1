@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.vasseugs.spring_boot_postgresql_1.dto.GuitarDTO;
 import ru.vasseugs.spring_boot_postgresql_1.service.GuitarService;
 import javax.validation.Valid;
@@ -40,14 +37,28 @@ public class GuitarController {
     // saving new guitar
     @PostMapping()
     public String saveNewGuitar(@ModelAttribute("guitar") @Valid GuitarDTO guitarDTO,
-                                BindingResult bindingResult) {
+                                BindingResult bindingResult, Model model) {
 
         if(bindingResult.hasErrors()) {
             return "new";
         }
 
         guitarService.save(guitarDTO);    // passing model to hide realization
+        model.addAttribute("guitars", guitarService.getAllGuitars());
 
+        return "guitars";
+    }
+
+    // showing the guitar
+    @GetMapping("/{id}")
+    public String showGuitar(@PathVariable("id") long id, Model model) {
+        model.addAttribute("guitar", guitarService.showGuitar(id));
+        return "show";
+    }
+
+    @DeleteMapping("/{id}")
+    public String deleteGuitar(@PathVariable("id") long id) {
+        guitarService.deleteGuitar(id);
         return "redirect:/guitars";
     }
 

@@ -5,5 +5,14 @@ spring:
     url: jdbc:postgresql://localhost:5432/guitars
     driver-class-name: org.postgresql.Driver
 
+
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+
 server:
   port: 8083
+
+
+
