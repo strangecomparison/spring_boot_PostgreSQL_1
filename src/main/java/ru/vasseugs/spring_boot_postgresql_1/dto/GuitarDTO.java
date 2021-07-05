@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Data
 @NoArgsConstructor
@@ -13,13 +14,13 @@ import javax.validation.constraints.NotEmpty;
 public class GuitarDTO {
 
     private int guitarId;
-    @NotEmpty(message = "should not be empty")
+    @NotNull
     private int manufacturer;
-    @NotEmpty(message = "should not be empty")
+    @NotNull
     private int model;
-    @NotEmpty(message = "should not be empty")
+    @NotNull
     private int country;
-    @NotEmpty(message = "should not be empty")
+    @NotNull
     @Min(value = 1949, message = "Year of issue should be greater than 1949")
     private int yearOfIssue;
 }
