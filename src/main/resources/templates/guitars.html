@@ -5,9 +5,22 @@
     <title>Guitars</title>
 </head>
 <body>
+
+
+<form th:action="@{/guitars/find}" th:method="GET">
+    <label for="f">Find by id: </label>
+    <input type="text" th:name="id" id="f"/>
+    <input type="submit" value="Find"/>
+</form>
+
+
+<br/>
+<br/>
+
+
 <div th:each="guitar : ${guitars}">
     <a th:href="@{/guitars/{id}(id=${guitar.getId()})}"
-       th:text="${guitar.getManufacturer().getManufacturerName() + ', ' + guitar.getGuitarModel().getModelName() + ', '
+       th:text="${guitar.getId() + ', ' + guitar.getManufacturer().getManufacturerName() + ', ' + guitar.getGuitarModel().getModelName() + ', '
        + guitar.getCountry().getCountryName + ', ' + guitar.getYearOfIssue()}">user</a>
 </div>
 

@@ -56,6 +56,14 @@ public class GuitarController {
         return "show";
     }
 
+    // a method to find guitar by id
+    // handles the request param and concatenates it to url as PathVariable
+    @GetMapping("/find")
+    public String findById(@RequestParam(name = "id") String param) {
+        return "redirect:/guitars/" + param;        // redirects to /guitars/{id} = showGuitar() method
+    }
+
+
     @DeleteMapping("/{id}")
     public String deleteGuitar(@PathVariable("id") long id) {
         guitarService.deleteGuitar(id);
