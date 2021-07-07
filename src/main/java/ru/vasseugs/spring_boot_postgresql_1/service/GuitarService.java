@@ -1,5 +1,6 @@
 package ru.vasseugs.spring_boot_postgresql_1.service;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import ru.vasseugs.spring_boot_postgresql_1.entities.CountryEntity;
@@ -78,10 +79,24 @@ public class GuitarService {
     }
 
 
-
-    public GuitarEntity showGuitar(long id) {
-        return guitarRepository.findById(id)
+    public GuitarDTO showGuitar(long id) {
+        GuitarEntity ge = guitarRepository.findById(id)
                 .orElse(null);
+
+        // using DTO because we need to convert image into Base64 string
+        GuitarDTO dto = null;
+
+        if(ge != null) {
+            dto = new GuitarDTO();
+            dto.setGuitarId(ge.getId());
+            dto.setManufacturer(ge.getManufacturer().getManufacturerName());
+            dto.setModel(ge.getGuitarModel().getModelName());
+            dto.setCountry(ge.getCountry().getCountryName());
+            dto.setYearOfIssue(ge.getYearOfIssue());
+            dto.setImage(Base64.encodeBase64String(ge.getImage()));
+
+        }
+        return dto;
     }
 
     public void deleteGuitar(long id) {

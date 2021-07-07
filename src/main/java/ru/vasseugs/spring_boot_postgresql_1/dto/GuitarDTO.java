@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -13,15 +14,16 @@ import javax.validation.constraints.NotNull;
 @AllArgsConstructor
 public class GuitarDTO {
 
-    private int guitarId;
+    private long guitarId;
     @NotNull
-    private int manufacturer;
+    private String manufacturer;
     @NotNull
-    private int model;
+    private String model;
     @NotNull
-    private int country;
+    private String country;
     @NotNull
     @Min(value = 1949, message = "Year of issue should be greater than 1949")
     private int yearOfIssue;
-    private byte[] image;
+
+    private String image;
 }

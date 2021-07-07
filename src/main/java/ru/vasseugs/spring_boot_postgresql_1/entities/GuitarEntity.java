@@ -3,6 +3,7 @@ package ru.vasseugs.spring_boot_postgresql_1.entities;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -31,7 +32,6 @@ public class GuitarEntity {
 
     private Integer yearOfIssue;
 
-    @Lob
     private byte[] image;
 
 

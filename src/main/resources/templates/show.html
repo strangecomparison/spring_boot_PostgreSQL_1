@@ -10,15 +10,16 @@
 <br/>
 <br/>
 
-<p th:text="${guitar.getManufacturer().getManufacturerName()}">VALUE</p>
-<p th:text="${guitar.getGuitarModel().getModelName()}">VALUE</p>
-<p th:text="${guitar.getCountry().getCountryName()}">VALUE</p>
-<p th:text="${guitar.getYearOfIssue()}">VALUE</p>
+<p th:text="${guitarDTO.getManufacturer()}">VALUE</p>
+<p th:text="${guitarDTO.getModel()}">VALUE</p>
+<p th:text="${guitarDTO.getCountry()}">VALUE</p>
+<p th:text="${guitarDTO.getYearOfIssue()}">VALUE</p>
+<img th:src="'data:image/jpeg;base64,' + ${guitarDTO.getImage()}" alt="" width="500" heigth="300"/>
 
 <br/>
 <br/>
 
-<form th:method="DELETE" th:action="@{/guitars/{id}(id=${guitar.getId()})}">
+<form th:method="DELETE" th:action="@{/guitars/{id}(id=${guitarDTO.getGuitarId()})}">
     <input type="submit" value="Delete the guitar"/>
 </form>
 

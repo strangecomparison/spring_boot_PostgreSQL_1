@@ -62,7 +62,9 @@ public class GuitarController {
     // showing the guitar
     @GetMapping("/{id}")
     public String showGuitar(@PathVariable("id") long id, Model model) {
-        model.addAttribute("guitar", guitarService.showGuitar(id));
+        // returning DTO because it inclues image of a guitar
+        // converted to a string
+        model.addAttribute("guitarDTO", guitarService.showGuitar(id));
         return "show";
     }
 
