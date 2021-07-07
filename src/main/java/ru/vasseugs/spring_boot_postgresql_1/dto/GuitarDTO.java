@@ -23,4 +23,5 @@ public class GuitarDTO {
     @NotNull
     @Min(value = 1949, message = "Year of issue should be greater than 1949")
     private int yearOfIssue;
+    private byte[] image;
 }

@@ -31,5 +31,8 @@ public class GuitarEntity {
 
     private Integer yearOfIssue;
 
+    @Lob
+    private byte[] image;
+
 
 }

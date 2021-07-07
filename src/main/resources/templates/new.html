@@ -5,9 +5,9 @@
     <title>Create new guitar</title>
 </head>
 <body>
-<form th:method="POST" th:action="@{/guitars}" th:object="${guitar}">
+<form th:method="POST" th:action="@{/guitars}" enctype="multipart/form-data">
     <label for="manufacturer">Select manufacturer: </label>
-    <select th:field="*{manufacturer}" id="manufacturer">
+    <select id="manufacturer" name="manufacturer">
         <option th:value="1">Fender</option>
         <option th:value="2">Gibson</option>
         <option th:value="3">Gretsch</option>
@@ -17,7 +17,7 @@
     <br/>
 
     <label for="model">Select model: </label>
-    <select th:field="*{model}" id="model">
+    <select id="model" name="model">
         <option th:value="1">Stratocaster</option>
         <option th:value="2">Telecaster</option>
         <option th:value="3">Jazzmaster</option>
@@ -35,7 +35,7 @@
     <br/>
 
     <label for="country">Select country: </label>
-    <select th:field="*{country}" id="country">
+    <select id="country" name="country">
         <option th:value="1">USA</option>
         <option th:value="2">JAPAN</option>
     </select>
@@ -43,7 +43,10 @@
     <br/>
 
     <label for="year">Enter year of issue: </label>
-    <input type="text" th:field="*{yearOfIssue}" id="year"/>
+    <input type="text" id="year" name="year"/>
+
+    <label for="guitar_img">Choose the image: </label>
+    <input type="file" id="guitar_img" name="guitar_img"/>
 
     <br/>
     <input type="submit" value="Create"/>

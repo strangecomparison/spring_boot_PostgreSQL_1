@@ -5,9 +5,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vasseugs.spring_boot_postgresql_1.dto.GuitarDTO;
 import ru.vasseugs.spring_boot_postgresql_1.service.GuitarService;
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/guitars")
@@ -36,16 +38,24 @@ public class GuitarController {
 
     // saving new guitar
     @PostMapping()
-    public String saveNewGuitar(@ModelAttribute("guitar") @Valid GuitarDTO guitarDTO,
-                                BindingResult bindingResult, Model model) {
+    public String saveNewGuitar(@RequestParam(name="manufacturer") String manufacturer,
+                                @RequestParam(name="model") String guitarModel,
+                                @RequestParam(name="country") String country,
+                                @RequestParam(name="year") String year,
+                                @RequestParam(name="guitar_img") MultipartFile multipartFile,
+                                Model model) {
 
-        if(bindingResult.hasErrors()) {
-            return "new";
+
+        try {
+            guitarService.save(manufacturer,
+                    guitarModel,
+                    country,
+                    year,
+                    multipartFile);    // passing model to hide realization
+            model.addAttribute("guitars", guitarService.getAllGuitars());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-
-        guitarService.save(guitarDTO);    // passing model to hide realization
-        model.addAttribute("guitars", guitarService.getAllGuitars());
-
         return "guitars";
     }
 

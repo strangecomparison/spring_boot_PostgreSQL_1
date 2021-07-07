@@ -1,6 +1,7 @@
 package ru.vasseugs.spring_boot_postgresql_1.service;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import ru.vasseugs.spring_boot_postgresql_1.entities.CountryEntity;
 import ru.vasseugs.spring_boot_postgresql_1.entities.GuitarEntity;
 import ru.vasseugs.spring_boot_postgresql_1.entities.GuitarModelEntity;
@@ -11,6 +12,7 @@ import ru.vasseugs.spring_boot_postgresql_1.repositories.GuitarModelRepository;
 import ru.vasseugs.spring_boot_postgresql_1.repositories.GuitarRepository;
 import ru.vasseugs.spring_boot_postgresql_1.repositories.ManufacturerRepository;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,7 +43,11 @@ public class GuitarService {
     }
 
     // saving guitar with its relations
-    public void save(GuitarDTO guitarDTO) {
+    public void save(String manufacturerParam,
+                     String modelParam,
+                     String countryParam,
+                     String yearParam,
+                     MultipartFile imageParam) throws IOException {
 
         // first, creating a new instance of target entity
         GuitarEntity guitar = new GuitarEntity();
@@ -50,15 +56,16 @@ public class GuitarService {
         using received data from our web form.
         we shouldn't create new because they exist as single instances
          */
-        ManufacturerEntity manufacturer = manufacturerRepository.getById((long) guitarDTO.getManufacturer());
-        GuitarModelEntity model = guitarModelRepository.getById((long) guitarDTO.getModel());
-        CountryEntity country = countryRepository.getById((long) guitarDTO.getCountry());
+        ManufacturerEntity manufacturer = manufacturerRepository.getById(Long.valueOf(manufacturerParam));
+        GuitarModelEntity model = guitarModelRepository.getById(Long.valueOf(modelParam));
+        CountryEntity country = countryRepository.getById((Long.valueOf(countryParam)));
 
         // initializing entity fields with obtained entities
         guitar.setManufacturer(manufacturer);
         guitar.setGuitarModel(model);
         guitar.setCountry(country);
-        guitar.setYearOfIssue(guitarDTO.getYearOfIssue()); // except this field
+        guitar.setYearOfIssue(Integer.valueOf(yearParam)); // except this field
+        guitar.setImage(imageParam.getBytes()); // and this
 
         // adding this particular guitar instance into other entities' lists connected with it
         manufacturer.addGuitar(guitar);
@@ -69,6 +76,8 @@ public class GuitarService {
         guitarRepository.save(guitar);
 
     }
+
+
 
     public GuitarEntity showGuitar(long id) {
         return guitarRepository.findById(id)
