@@ -3,12 +3,10 @@ package ru.vasseugs.spring_boot_postgresql_1.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.vasseugs.spring_boot_postgresql_1.dto.GuitarDTO;
 import ru.vasseugs.spring_boot_postgresql_1.service.GuitarService;
-import javax.validation.Valid;
+
 import java.io.IOException;
 
 @Controller
@@ -32,11 +30,10 @@ public class GuitarController {
     // creating new guitar
     @GetMapping("/new")
     public String createNewGuitar(Model model) {
-        model.addAttribute("guitar", new GuitarDTO());
         return "new";
     }
 
-    // saving new guitar
+    // saving new guitar, GuitarDTO is not used
     @PostMapping()
     public String saveNewGuitar(@RequestParam(name="manufacturer") String manufacturer,
                                 @RequestParam(name="model") String guitarModel,
@@ -62,9 +59,9 @@ public class GuitarController {
     // showing the guitar
     @GetMapping("/{id}")
     public String showGuitar(@PathVariable("id") long id, Model model) {
-        // returning DTO because it inclues image of a guitar
+        // returning DTO because it includes an image of a guitar
         // converted to a string
-        model.addAttribute("guitarDTO", guitarService.showGuitar(id));
+        model.addAttribute("guitarDTO", guitarService.showGuitarDTO(id));
         return "show";
     }
 
@@ -81,6 +78,35 @@ public class GuitarController {
         guitarService.deleteGuitar(id);
         return "redirect:/guitars";
     }
+
+    @GetMapping("/{id}/edit")
+    public String editGuitar(@PathVariable("id") long id, Model model) {
+        model.addAttribute("guitar", guitarService.showGuitarEntity(id));
+        return "edit";
+    }
+
+    // получаем из формы в методе updateGuitar атрибут "guitar" с измененными в нем данными
+    @PatchMapping("/{id}")
+    public String saveEditedGuitar(@PathVariable("id") long id,
+                                   @RequestParam(name="manufacturer") String manufacturer,
+                                   @RequestParam(name="model") String guitarModel,
+                                   @RequestParam(name="country") String country,
+                                   @RequestParam(name="year") String year,
+                                   @RequestParam(name="guitar_img") MultipartFile multipartFile) {
+
+        try {
+            guitarService.edit(id,
+                    manufacturer,
+                    guitarModel,
+                    country,
+                    year,
+                    multipartFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "redirect:/guitars";
+    }
+
 
 
 

@@ -75,11 +75,10 @@ public class GuitarService {
 
         // finally saving
         guitarRepository.save(guitar);
-
     }
 
 
-    public GuitarDTO showGuitar(long id) {
+    public GuitarDTO showGuitarDTO(long id) {
         GuitarEntity ge = guitarRepository.findById(id)
                 .orElse(null);
 
@@ -94,13 +93,43 @@ public class GuitarService {
             dto.setCountry(ge.getCountry().getCountryName());
             dto.setYearOfIssue(ge.getYearOfIssue());
             dto.setImage(Base64.encodeBase64String(ge.getImage()));
-
         }
         return dto;
     }
 
+    public GuitarEntity showGuitarEntity(long id) {
+        return guitarRepository.findById(id).orElse(null);
+    }
+
     public void deleteGuitar(long id) {
         guitarRepository.deleteById(id);
+    }
+
+    public void edit(long id,
+                     String manufacturerParam,
+                     String modelParam,
+                     String countryParam,
+                     String yearParam,
+                     MultipartFile imageParam) throws IOException {
+
+        // retrieving the guitar entity
+        GuitarEntity toUpdate = guitarRepository.findById(id).orElse(null);
+
+        // retrieving its foreign key values
+        ManufacturerEntity manufacturer = manufacturerRepository.getById(Long.valueOf(manufacturerParam));
+        GuitarModelEntity model = guitarModelRepository.getById(Long.valueOf(modelParam));
+        CountryEntity country = countryRepository.getById((Long.valueOf(countryParam)));
+
+        // updating its values
+        assert toUpdate != null;
+        toUpdate.setManufacturer(manufacturer);
+        toUpdate.setGuitarModel(model);
+        toUpdate.setCountry(country);
+        toUpdate.setYearOfIssue(Integer.valueOf(yearParam));
+        toUpdate.setImage(imageParam.getBytes());
+
+        // finally saving
+        guitarRepository.save(toUpdate);
     }
 
 

@@ -19,6 +19,11 @@
 <br/>
 <br/>
 
+<a th:href="@{/guitars/{id}/edit(id=${guitarDTO.getGuitarId()})}">Edit</a>
+
+<br/>
+<br/>
+
 <form th:method="DELETE" th:action="@{/guitars/{id}(id=${guitarDTO.getGuitarId()})}">
     <input type="submit" value="Delete the guitar"/>
 </form>

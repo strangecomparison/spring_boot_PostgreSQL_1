@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Create new guitar</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/guitars/{id}(id=${guitar.getId()})}" th:object="${guitar}" enctype="multipart/form-data">
+  <label for="manufacturer">Select manufacturer: </label>
+  <select id="manufacturer" name="manufacturer">
+    <option th:value="${guitar.getManufacturer().getId()}" selected="selected" hidden="hidden" th:text="${guitar.getManufacturer().getManufacturerName()}"></option>
+    <option th:value="1">Fender</option>
+    <option th:value="2">Gibson</option>
+    <option th:value="3">Gretsch</option>
+    <option th:value="4">Ibanez</option>
+  </select>
+
+  <br/>
+
+  <label for="model">Select model: </label>
+  <select id="model" name="model">
+    <option th:value="${guitar.getGuitarModel().getId()}" selected="selected" hidden="hidden" th:text="${guitar.getGuitarModel().getModelName()}"></option>
+    <option th:value="1">Stratocaster</option>
+    <option th:value="2">Telecaster</option>
+    <option th:value="3">Jazzmaster</option>
+    <option th:value="4">Les Paul</option>
+    <option th:value="5">SG</option>
+    <option th:value="6">ES-335</option>
+    <option th:value="7">6120</option>
+    <option th:value="8">Countryman</option>
+    <option th:value="9">Falcon</option>
+    <option th:value="10">J. Custom</option>
+    <option th:value="11">RG 980</option>
+    <option th:value="12">JS1000</option>
+  </select>
+
+  <br/>
+
+  <label for="country">Select country: </label>
+  <select id="country" name="country">
+    <option th:value="${guitar.getCountry().getId()}" selected="selected" hidden="hidden" th:text="${guitar.getCountry().getCountryName()}"></option>
+    <option th:value="1">USA</option>
+    <option th:value="2">JAPAN</option>
+  </select>
+
+  <br/>
+
+  <label for="year">Enter year of issue: </label>
+  <input type="text" id="year" name="year" th:value="${guitar.getYearOfIssue()}"/>
+
+  <label for="guitar_img">Choose the image: </label>
+  <input type="file" id="guitar_img" name="guitar_img"/>
+
+  <br/>
+  <input type="submit" value="Update"/>
+</form>
+
+</body>
+</html>
