@@ -1,7 +1,7 @@
-package ru.vasseugs.spring_boot_postgresql_1.repositories;
+package ru.vasseugs.spring_boot_postgresql_1.domain.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.vasseugs.spring_boot_postgresql_1.entities.User;
+import ru.vasseugs.spring_boot_postgresql_1.domain.user.User;
 
 import java.util.Optional;
 

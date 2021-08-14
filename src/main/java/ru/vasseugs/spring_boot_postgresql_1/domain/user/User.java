@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.entities;
+package ru.vasseugs.spring_boot_postgresql_1.domain.user;
 
 import lombok.Data;
 import ru.vasseugs.spring_boot_postgresql_1.security.Role;

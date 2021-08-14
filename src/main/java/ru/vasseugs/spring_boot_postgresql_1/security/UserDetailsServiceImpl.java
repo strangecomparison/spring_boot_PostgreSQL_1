@@ -4,8 +4,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.vasseugs.spring_boot_postgresql_1.entities.User;
-import ru.vasseugs.spring_boot_postgresql_1.repositories.UserRepository;
+import ru.vasseugs.spring_boot_postgresql_1.domain.user.User;
+import ru.vasseugs.spring_boot_postgresql_1.domain.user.UserRepository;
 
 /**
  * Наша реализация интерфейса UserDetailsService вместо

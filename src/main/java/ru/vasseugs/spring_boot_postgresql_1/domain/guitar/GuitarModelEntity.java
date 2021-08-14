@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.entities;
+package ru.vasseugs.spring_boot_postgresql_1.domain.guitar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,17 +11,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "country")
-public class CountryEntity {
+@Table(name = "models")
+public class GuitarModelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String countryName;
+    @Column(name="model_name")
+    private String modelName;
 
     @OneToMany(
-            mappedBy = "country",
+            mappedBy = "guitarModel",
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY
     )
@@ -29,11 +30,11 @@ public class CountryEntity {
 
     public void addGuitar(GuitarEntity guitarEntity) {
         guitars.add(guitarEntity);
-        guitarEntity.setCountry(this);
+        guitarEntity.setGuitarModel(this);
     }
 
     public void removeGuitar(GuitarEntity guitarEntity) {
         guitars.remove(guitarEntity);
-        guitarEntity.setCountry(null);
+        guitarEntity.setGuitarModel(null);
     }
 }

@@ -1,9 +1,8 @@
-package ru.vasseugs.spring_boot_postgresql_1.entities;
+package ru.vasseugs.spring_boot_postgresql_1.domain.guitar;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 
@@ -30,9 +29,9 @@ public class GuitarEntity {
     @JoinColumn(name = "country", referencedColumnName = "id")
     private CountryEntity country;
 
+    @Column(name="year_of_issue")
     private Integer yearOfIssue;
 
     private byte[] image;
-
 
 }
