@@ -1,8 +1,8 @@
 package ru.vasseugs.spring_boot_postgresql_1.domain.user;
 
 import lombok.Data;
-import ru.vasseugs.spring_boot_postgresql_1.security.Role;
-import ru.vasseugs.spring_boot_postgresql_1.security.Status;
+import ru.vasseugs.spring_boot_postgresql_1.config.security.Role;
+import ru.vasseugs.spring_boot_postgresql_1.config.security.Status;
 
 import javax.persistence.*;
 

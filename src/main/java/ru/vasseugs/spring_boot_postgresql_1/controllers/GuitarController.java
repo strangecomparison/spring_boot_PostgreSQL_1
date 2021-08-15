@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.vasseugs.spring_boot_postgresql_1.service.GuitarService;
+import ru.vasseugs.spring_boot_postgresql_1.dao.GuitarService;
 
 import java.io.IOException;
 

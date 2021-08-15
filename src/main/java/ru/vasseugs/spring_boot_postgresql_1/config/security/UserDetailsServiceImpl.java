@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.security;
+package ru.vasseugs.spring_boot_postgresql_1.config.security;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,7 +12,7 @@ import ru.vasseugs.spring_boot_postgresql_1.domain.user.UserRepository;
  * реализации от SpringSecurity, когда мы хранили информацию
  * о пользователях в памяти.
  * По сути, этот сервис призван получать данные о пользователе
- * из БД на основании email.
+ * из БД на основании email. Это DAO
  */
 
 @Service("userDetailsServiceImpl")
@@ -27,7 +27,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     // переопределяем этот метод так, что он возвращает нам
     // реализацию интерфейса UserDetails, то есть информацию о пользователе,
     // понятную спрингу.
-
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email).orElseThrow(() ->

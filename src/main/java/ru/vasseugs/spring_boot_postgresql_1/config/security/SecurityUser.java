@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.security;
+package ru.vasseugs.spring_boot_postgresql_1.config.security;
 
 
 import lombok.Data;

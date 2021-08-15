@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.service;
+package ru.vasseugs.spring_boot_postgresql_1.dao;
 
 import org.junit.jupiter.api.*;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.dbconfig;
+package ru.vasseugs.spring_boot_postgresql_1.config.db;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;

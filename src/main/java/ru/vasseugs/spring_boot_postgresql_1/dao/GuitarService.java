@@ -1,4 +1,4 @@
-package ru.vasseugs.spring_boot_postgresql_1.service;
+package ru.vasseugs.spring_boot_postgresql_1.dao;
 
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.stereotype.Service;
